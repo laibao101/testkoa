@@ -1,0 +1,7 @@
+[{
+	"name": "xiaoming",
+	"age": 20
+}, {
+	"name": "hang",
+	"age": "26"
+}]
