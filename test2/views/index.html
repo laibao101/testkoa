@@ -23,6 +23,7 @@
    </div>
    <div class="update">
      <h2>Modify users</h2>
+     <lable>OldName:</lable> <input type="text" id="mod-old-name" placeholder="input old name" > <br>
      <lable>Name:</lable> <input type="text" id="mod-name" placeholder="input name" > <br>
      <lable>Age:</lable> <input type="text" id="mod-age" placeholder="input age" > <br>
      <input type="button" value="Mod user" id="mod-user">
@@ -81,7 +82,8 @@
      document.getElementById('mod-user').addEventListener('click', function() {
        var name = document.getElementById('mod-name').value
        var age = document.getElementById('mod-age').value
-       fetchOprate('/api/user/'+name, 'PATCH', {age: age}) //发送请求
+       var oldName = document.getElementById('mod-old-name').value
+       fetchOprate('/api/user/'+name, 'PATCH', {age: age,oldname:oldName}) //发送请求
        //在router.js文件中，该接口的请求路径为 '/api/user/:name'， 需带上参数 name
      })
      //delete 请求
