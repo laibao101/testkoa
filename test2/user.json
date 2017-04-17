@@ -1,7 +1,1 @@
-[{
-	"name": "xiaoming",
-	"age": 20
-}, {
-	"name": "hang",
-	"age": "26"
-}]
+[{"name":"xiaoming","age":20},{"name":"hang","age":"26"},{"name":"laowang","age":"24"}]
