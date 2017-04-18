@@ -2,6 +2,9 @@ const Koa = require('koa');
 const router = require('koa-router');
 const co = require('co');
 const nunjucksViews = require('koa-nunjucks-promise');
+const mount = require('koa-mount');
+const server = require('koa-static');
+
 
 const app = new Koa();
 const route = new router(); //新建路由对象
@@ -22,6 +25,14 @@ route.get('/',co.wrap(function *(ctx) {
 	yield ctx.render('index',{title:'hello',data:'laowang Yeah!'});
 }));
 
+
+route.get('/route/test', co.wrap(function* (ctx) {  //路径配置
+    ctx.body = 'feifeiyu nuaa' //直接在返回的body内打入字符串
+}));
+
+
+//设置静态文件路径
+app.use(mount('/static',server(`${__dirname}/public`)))
 
 
 app.use(route.routes())
