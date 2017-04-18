@@ -9,7 +9,7 @@ let filePath = './user.json' //json文件路径
 
 
 // Create a MySQL connection pool (do this once)
-const db = mysql.createPool({ user: 'root', password: 'root123', database: 'test', host: 'localhost' });
+const db = mysql.createPool({ user: 'root', password: 'root', database: 'test', host: 'localhost' });
 
 
 
