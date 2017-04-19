@@ -35,7 +35,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage:storage});
 
-router.post('/upload',upload.single('avatar'),ctx => {
+router.post('/upload',upload.any(),ctx => {
 	ctx.body = {
 		code:1,
 		file:ctx.req.file
