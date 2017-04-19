@@ -2,7 +2,7 @@ const XLSX = require('xlsx');
 const Koa = require('koa');
 const Route = require('koa-router');
 const logger = require('koa-logger')();
-const render = require('koa-ejs');
+// const render = require('koa-ejs');
 const path = require('path')
 
 const workbook = XLSX.readFile('test2.xlsx');
@@ -51,21 +51,26 @@ keys
 const app = new Koa();
 const router = new Route();
 
-render(app, {
-  root: path.join(__dirname, '/views'),
-  viewExt: 'ejs',
-  cache: false,
-  debug: true
+const co = require('co');
+const view = require('co-views');
+
+const render = view('./views',{
+    default:'ejs',//如果不写，默认为jade
+    map:{
+        html:'swig',//指定html文件用swig解析
+        ejs:'ejs',//指定ejs文件用ejs解析
+        jade:'jade',//...
+    }
 });
-
-
 
 
 app.use(logger);
 
-app.use(async function (ctx) {
-  await ctx.render('index',{data:data});
-});
+router.get('/', ctx => {
+    console.log(2);
+    ctx.body = render('index.ejs');
+    console.log(ctx.body);
+})
 
 app.use(router.routes());
 
