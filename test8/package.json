@@ -1,0 +1,24 @@
+{
+    "name": "test8",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "gulp": "^3.9.1",
+        "gulp-nodemon": "^2.2.1",
+        "koa": "^2.2.0",
+        "koa-logger": "^2.0.1",
+        "koa-mysql": "^1.0.3",
+        "koa-nunjucks-promise": "^1.1.1",
+        "koa-router": "^7.1.1",
+        "xlsx": "^0.9.11",
+        "koa-mount": "^3.0.0",
+        "koa-static": "^3.0.0"
+    }
+}

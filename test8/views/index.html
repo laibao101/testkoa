@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+
+<body>
+
+<link href="https://cdn.bootcss.com/semantic-ui/2.2.10/semantic.css" rel="stylesheet">
+
+
+	<div class="">
+		<table class="ui celled table selectable ">
+			<thead>
+				<tr>
+					<th class="ui center aligned ">工号</th>
+					<th class="center alignedr">姓名</th>
+					<th class="center alignedr">日期</th>
+					<th class="center alignedr">T1(0:00至10:30)</th>
+					<th class="center alignedr">T4(13:00至24:00)</th>
+					<th class="center alignedr">状态(0：正常，1：迟到，2：漏打卡，3：旷工，4：程序无法识别)</th>
+					<th class="center alignedr">是否工作日</th>
+					<th class="center alignedr">是否加班</th>
+					<th class="center alignedr">工时</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for items in data %}
+				<tr>
+					<td class="center alignedr">
+						{% if items['工号'] != "" %}
+						  {{items['工号']}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items.姓名 %}
+						  {{items.姓名}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items.日期 %}
+						  {{items.日期}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items['T1(0:00至10:30)'] %}
+						  {{items['T1(0:00至10:30)']}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items['T4(13:00至24:00)'] %}
+						  {{items['T4(13:00至24:00)']}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items['状态(0：正常，1：迟到，2：漏打卡，3：旷工，4：程序无法识别)'] %}
+						  {{items['状态(0：正常，1：迟到，2：漏打卡，3：旷工，4：程序无法识别)']}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items.是否工作日 %}
+						  {{items.是否工作日}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items.是否加班 %}
+						  {{items.是否加班}}
+						{% endif %}
+					</td>
+					<td class="center alignedr">
+						{% if items.工时 %}
+						  {{items.工时}}
+						{% endif %}
+					</td>
+				</tr>
+				{% else %}
+				<td class="center alignedr">This would display if the 'item' collection were empty</td>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+
+
+</body>
+
+</html>
