@@ -8,5 +8,14 @@
 </head>
 <body>
 	<h1>index</h1>
+	<ul>
+
+		<% for (var key in data) { %>
+			 <% data[key] %>
+			  		<% for(var i in data[key]) { %>
+				  <li><%= data[key][i] %></li>
+					<% } %>
+		<% } %>
+	</ul>
 </body>
 </html>

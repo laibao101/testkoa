@@ -5,7 +5,7 @@ const logger = require('koa-logger')();
 // const render = require('koa-ejs');
 const path = require('path')
 
-const workbook = XLSX.readFile('test2.xlsx');
+const workbook = XLSX.readFile('test3.xlsx');
 
 
 const sheetNames = workbook.SheetNames;
@@ -21,8 +21,10 @@ const worksheet = workbook.Sheets[sheetNames[0]];
 
 
 const headers = {};
-const data = [];
+let data = [];
 const keys = Object.keys(worksheet);
+
+// console.log(worksheet);
 keys
     // 过滤以 ! 开头的 key
     .filter(k => k[0] !== '!')
@@ -37,7 +39,7 @@ keys
         // 保存字段名
         if (row === 1) {
             headers[col] = value;
-            return;
+            return false;
         }
         // 解析成 JSON
         if (!data[row]) {
@@ -45,34 +47,49 @@ keys
         }
         data[row][headers[col]] = value;
     });
+	data = data.slice(2)
 // console.log(data); //
 
 
-const app = new Koa();
-const router = new Route();
-
+const router = require('koa-router');
 const co = require('co');
-const view = require('co-views');
+const nunjucksViews = require('koa-nunjucks-promise');
+const mount = require('koa-mount');
+const server = require('koa-static');
 
-const render = view('./views',{
-    default:'ejs',//如果不写，默认为jade
-    map:{
-        html:'swig',//指定html文件用swig解析
-        ejs:'ejs',//指定ejs文件用ejs解析
-        jade:'jade',//...
-    }
+
+const app = new Koa();
+const route = new router(); //新建路由对象
+
+app.use(nunjucksViews(`${__dirname}/views`),{ //配置模板文件路径，例如：末班文件统一放在工程目录的views文件夹中
+	ext:'ejs', //渲染文件后缀为html的文件
+	noCache:true, //开发环境下不设置缓存
+	watch:true, //开发环境下观察模板文件的变化并更新，方便开发
+	filters:{//过滤器
+		json:function (str) {
+			return JSON.stringify(str,null,2)
+		}
+	}
 });
 
 
-app.use(logger);
-
-router.get('/', ctx => {
-    console.log(2);
-    ctx.body = render('index.ejs');
-    console.log(ctx.body);
-})
-
-app.use(router.routes());
+route.get('/',co.wrap(function *(ctx) {
+	// console.log(data);
+	yield ctx.render('index2',{title:'hello',data:data});
+}));
 
 
-app.listen(3000, () => console.log('server start at port 3000'));
+route.get('/route/test', co.wrap(function* (ctx) {  //路径配置
+    ctx.body = 'feifeiyu nuaa' //直接在返回的body内打入字符串
+}));
+
+
+//设置静态文件路径
+app.use(mount('/static',server(`${__dirname}/public`)))
+
+
+app.use(route.routes())
+	.use(route.allowedMethods());
+
+
+app.listen(3000,() => console.log('server started,port 3000'));
