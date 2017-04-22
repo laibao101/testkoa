@@ -9,7 +9,7 @@ const staticPath = './static';
 
 //解析资源类型
 function parseMime (url) {
-	const extName = path.extName(url);
+	let extName = path.extname(url);
 	extName = extName ? extName.slice(1) : "unknown";
 	return mimes[extName];
 }
