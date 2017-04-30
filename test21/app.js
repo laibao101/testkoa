@@ -30,7 +30,7 @@ app.use( async ( ctx ) => {
   	});
   } else if ( ctx.url === '/api/picture/upload.json' && ctx.method === 'POST' ) {
     // 上传文件请求处理
-    const result = { success: false };
+    let result = { success: false };
     const serverFilePath = path.join( __dirname, 'static/image' );
 
     // 上传文件事件
