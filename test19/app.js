@@ -12,10 +12,16 @@ app.use(views(
 ));
 
 
+const data = [
+	{"name":"laowang","age":40,"sex":"male"},
+	{"name":"xiaowang","age":20,"sex":"male"}
+];
+
 app.use(async ctx => {
 	const title = "lao wang";
 	await ctx.render('index',{
-		title
+		title,
+		data
 	});
 });
 

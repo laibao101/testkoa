@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title><%= title %></title>
-</head>
-<body>
-    <h1><%= title %></h1>
-    <p>EJS Welcome to <%= title %></p>
+<% include header.ejs %>
+    <p>我是index.ejs</p>
+    <p>我是数据里面的title: <%= title %></p>
+    <p>下面是数据里面的data:</p>
+    <ul>
+        <% for(var i = 0,len = data.length; i < len; i++){ %>
+
+        <li>
+            <span><%= data[i].name %></span>
+            <span><%= data[i].age %></span>
+            <span><%= data[i].sex %></span>
+        </li>
+        <% } %>
+    </ul>
 </body>
 </html>

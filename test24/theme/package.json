@@ -1,0 +1,12 @@
+{
+  "name": "club",
+  "version": "0.0.1",
+  "description": "club",
+  "locale": "zh-cn",
+  "tabs": ["全部", "问答", "分享", "吐槽", "招聘"],
+  "dependencies": {
+    "gravatar": "1.6.0",
+    "moment": "2.17.1",
+    "markdown-it": "8.2.2"
+  }
+}
